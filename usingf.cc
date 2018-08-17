@@ -8,6 +8,7 @@ void gg(char, char) { return; }
 
 func<int> f = ff;
 func<char> g = gg;
+func<double> h = [](double, double){ return; };
 
 int main() {
   f(1,1);
