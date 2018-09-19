@@ -1,32 +1,12 @@
-# Prerequisites
-*.d
+# ignore all first
+# then whitelist the file types we want
+*
 
-# Compiled Object files
-*.slo
-*.lo
+# whitelist
+!*.*
+!*/
+
+# then ignore what we want here
 *.o
-*.obj
-
-# Precompiled Headers
-*.gch
-*.pch
-
-# Compiled Dynamic libraries
 *.so
-*.dylib
-*.dll
-
-# Fortran module files
-*.mod
-*.smod
-
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
-
-# Executables
-*.exe
-*.out
-*.app
+.*
