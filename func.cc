@@ -24,10 +24,15 @@
 // we have to store R, Args..., as well as T the raw type of function
 // but for func class, as a wrapper, we only show R and Args
 // thus we have to store T inside func, resulting in nested template inside
-// and to discard T outside, we have to use function templates to automatically deduce T from the function object
+// and to discard T outside, we have to use function templates to automatically deduce T from the function
 // intuitively, constructor is a good one for this purpose
-// additionally, since T should be inside func class, we have to wrap the function object as a class,
+// additionally, since T should be inside func class, we have to wrap the function as a class,
 // which can use T as template arguments, otherwise we have to write T in the top template arguments to be not ok
+
+// while it's not that elegant we have to give two types of information when create a func object:
+// 1. class template to provide R and Args
+// 2. raw function to give T
+// which makes sense since T can be function pointer, lambda or functor
 
 // just a declaration
 template <class> class func;
