@@ -21,12 +21,12 @@
 // it's very hard to deduce return and args type from T
 //
 // here is the idea:
-// we have to store R, Args..., as well as T the raw type of functor
+// we have to store R, Args..., as well as T the raw type of function
 // but for func class, as a wrapper, we only show R and Args
 // thus we have to store T inside func, resulting in nested template inside
-// and to discard T outside, we have to use function templates to automatically deduce T from functor
+// and to discard T outside, we have to use function templates to automatically deduce T from the function object
 // intuitively, constructor is a good one for this purpose
-// additionally, since T should be inside func class, we have to wrap the functor as a class,
+// additionally, since T should be inside func class, we have to wrap the function object as a class,
 // which can use T as template arguments, otherwise we have to write T in the top template arguments to be not ok
 
 // just a declaration
