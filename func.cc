@@ -33,6 +33,7 @@
 // 1. class template to provide R and Args
 // 2. raw function to give T
 // which makes sense since T can be function pointer, lambda or functor
+// and 1. is the formalised representation of the raw function, while 2. is the actual type
 
 // just a declaration
 template <class> class func;
@@ -49,7 +50,8 @@ template <class R, class... Args> class func<R(Args...)> {
         ffunc(const F& f): _f(f) {}
         ~ffunc() {}
         R run(Args... args) { return _f(std::forward<Args>(args)...); }
-      private: // private is ok even if we define _fp as its superclass, since superclass is virtual, we can confirm that _fp is in derived class thus has private _f member
+      private: // private is ok even if we define _fp as its superclass, since superclass is virtual
+               //we can confirm that _fp is in derived class thus has private _f member
         F _f; // actual funtor stored here so that we can match any functor using F
     };
     // notice that T is the type of functor, kind of redundant here
