@@ -30,10 +30,12 @@
 // which can use T as template arguments, otherwise we have to write T in the top template arguments to be not ok
 
 // while it's not that elegant we have to give two types of information when create a func object:
-// 1. class template to provide R and Args
-// 2. raw function to give T
+// 1. class template to provide R and Args, for () operator
+// 2. raw function to give T, to call the actual functionality
 // which makes sense since T can be function pointer, lambda or functor
 // and 1. is the formalised representation of the raw function, while 2. is the actual type
+// in words, the workaround with three different types of function objects is because:
+// it's hard to deduce return and argument types from types of them by a general method
 
 // just a declaration
 template <class> class func;
