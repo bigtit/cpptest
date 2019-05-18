@@ -44,21 +44,19 @@ template <class R, class... Args> class func<R(Args...)> {
   public:
     class ffunc0 {
       public:
-        virtual ~ffunc0() = default;
         virtual R run(Args...) = 0;
     };
     template <class F> class ffunc: public ffunc0 {
       public:
-        ffunc(const F& f): _f(f) {}
-        ~ffunc() {}
+        ffunc(F&& f): _f(f) {}
         R run(Args... args) { return _f(std::forward<Args>(args)...); }
       private: // private is ok even if we define _fp as its superclass, since superclass is virtual
                //we can confirm that _fp is in derived class thus has private _f member
-        F _f; // actual funtor stored here so that we can match any functor using F
+        const F& _f; // actual funtor stored here so that we can match any functor using F
     };
     // notice that T is the type of functor, kind of redundant here
     func() = delete;
-    template <class F> func(F f) { _fp = std::make_shared<ffunc<F>>(f); }
+    template <class F> func(F&& f) { _fp = std::make_shared<ffunc<F>>(f); }
     // func(const func& f): _fp(f._fp) {}
     // func& operator=(const func& f) { _fp = f._fp; return *this; }
     R operator()(Args... args) { return _fp->run(std::forward<Args>(args)...); }
